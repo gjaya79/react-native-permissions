@@ -29,28 +29,15 @@
   return resolve(RNPermissionStatusNotAvailable);
 #else
 
-  if (@available(iOS 13.0, *)) {
-    switch ([[CBManager new] authorization]) {
-      case CBManagerAuthorizationNotDetermined:
-        return resolve(RNPermissionStatusNotDetermined);
-      case CBManagerAuthorizationRestricted:
-        return resolve(RNPermissionStatusRestricted);
-      case CBManagerAuthorizationDenied:
-        return resolve(RNPermissionStatusDenied);
-      case CBManagerAuthorizationAllowedAlways:
-        return resolve(RNPermissionStatusAuthorized);
-    }
-  } else {
-    switch ([CBPeripheralManager authorizationStatus]) {
-      case CBPeripheralManagerAuthorizationStatusNotDetermined:
-        return resolve(RNPermissionStatusNotDetermined);
-      case CBPeripheralManagerAuthorizationStatusRestricted:
-        return resolve(RNPermissionStatusRestricted);
-      case CBPeripheralManagerAuthorizationStatusDenied:
-        return resolve(RNPermissionStatusDenied);
-      case CBPeripheralManagerAuthorizationStatusAuthorized:
-        return resolve(RNPermissionStatusAuthorized);
-    }
+  switch ([[CBManager new] authorization]) {
+    case CBManagerAuthorizationNotDetermined:
+      return resolve(RNPermissionStatusNotDetermined);
+    case CBManagerAuthorizationRestricted:
+      return resolve(RNPermissionStatusRestricted);
+    case CBManagerAuthorizationDenied:
+      return resolve(RNPermissionStatusDenied);
+    case CBManagerAuthorizationAllowedAlways:
+      return resolve(RNPermissionStatusAuthorized);
   }
 #endif
 }
